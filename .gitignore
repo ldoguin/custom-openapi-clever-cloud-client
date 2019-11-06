@@ -1,0 +1,4 @@
+build/
+go-test/openapi/
+openapi-generator-cli-*.jar
+openapi.json
