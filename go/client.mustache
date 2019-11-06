@@ -21,6 +21,7 @@ import (
 	"time"
 	"unicode/utf8"
 
+    "github.com/dghubble/oauth1"
 	"golang.org/x/oauth2"
 )
 
@@ -53,8 +54,21 @@ type service struct {
 // NewAPIClient creates a new API client. Requires a userAgent string describing your application.
 // optionally a custom http.Client to allow for advanced features such as caching.
 func NewAPIClient(cfg *Configuration) *APIClient {
+
+	consumerKey := os.Getenv("CC_CONSUMER_KEY")
+	consumerSecret := os.Getenv("CC_CONSUMER_SECRET")
+	accessToken := os.Getenv("CC_ACCESS_TOKEN")
+	accessSecret := os.Getenv("CC_ACCESS_SECRET")
+
+	if consumerKey == "" || consumerSecret == "" || accessToken == "" || accessSecret == "" {
+		panic("Missing required environment variable")
+	}
+
+	config := oauth1.NewConfig(consumerKey, consumerSecret)
+	token := oauth1.NewToken(accessToken, accessSecret)
+
 	if cfg.HTTPClient == nil {
-		cfg.HTTPClient = http.DefaultClient
+		cfg.HTTPClient = config.Client(oauth1.NoContext, token)
 	}
 
 	c := &APIClient{}
