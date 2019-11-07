@@ -9,7 +9,7 @@ wget https://api.clever-cloud.com/v2/openapi.json
 
 ## Go client
 
-for of the go client templates to include oauth1 auth in ./go
+for of the go client templates to include oauth1 auth in ./go. Copy has been made at version 4.2.0.
 
 `java -jar openapi-generator-cli-4.2.0.jar generate -i openapi.json -g go -o ./build/go-client -t go --skip-validate-spec`
 
