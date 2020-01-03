@@ -1,0 +1,21 @@
+{
+    "groupId":"com.clevercloud",
+    "artifactId":"clever-java-api",
+    "artifactVersion":"1.0.1-SNAPSHOT",
+    "modelPackage":"com.clevercloud.client.model",
+    "apiPackage":"com.clevercloud.client.api",
+    "invokerPackage":"com.clevercloud.client",
+    "artifactUrl":"https://github.com/ldoguin/custom-openapi-clever-cloud-client",
+    "artifactDescription":"This is an automatically generated Clever Cloud API client which uses OpenAPI.",
+    "scmConnection":"scm:git:git@github.com:ldoguin/custom-openapi-clever-cloud-client.git",
+    "scmDeveloperConnection":"scm:git:git@github.com:ldoguin/custom-openapi-clever-cloud-client.git",
+    "scmUrl":"https://github.com/ldoguin/custom-openapi-clever-cloud-client",
+    "developerName":"Clever Cloud",
+    "developerEmail":"support@clever-cloud.com",
+    "developerOrganization":"Clever Cloud",
+    "developerOrganizationUrl":"https://clever-cloud.com/",
+    "licenseName":"Apache 2.0",
+    "licenseUrl":"https://www.apache.org/licenses/LICENSE-2.0.txt"
+}
+    
+

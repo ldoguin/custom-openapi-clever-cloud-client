@@ -1,4 +1,5 @@
 build/
-go-test/openapi/
+golang/go-test/clevercloud/
+spring/clevercloud-java-client
 openapi-generator-cli-*.jar
 openapi.json

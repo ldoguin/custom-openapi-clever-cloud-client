@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"./openapi"
+	openapi "./clevercloud"
 )
 
 func filterAvailableInstanceView(ss []openapi.AvailableInstanceView, test func(openapi.AvailableInstanceView) bool) (ret []openapi.AvailableInstanceView) {
@@ -22,14 +22,14 @@ func main() {
 	client := openapi.NewAPIClient(config)
 	var err error
 	var user openapi.UserView
-	user, _, err = client.DefaultApi.GetUser1(context.Background())
+	user, _, err = client.SelfApi.GetUser(context.Background())
 
 	fmt.Printf("Raw Response Body:\n%v\n", user)
 	if err != nil {
 		panic(err.Error())
 	}
 	var zones []openapi.ZoneView
-	zones, _, err = client.DefaultApi.GetZones(context.Background())
+	zones, _, err = client.ProductsApi.GetZones(context.Background())
 
 	fmt.Printf("Raw Response Body:\n%v\n", zones)
 	if err != nil {
@@ -43,7 +43,7 @@ func main() {
 	var availableInstances []openapi.AvailableInstanceView
 	var dockerInstance openapi.AvailableInstanceView
 
-	availableInstances, _, err = client.DefaultApi.GetAvailableInstances(context.Background(), nil)
+	availableInstances, _, err = client.ProductsApi.GetAvailableInstances(context.Background(), nil)
 	dockerInstance = filterAvailableInstanceView(availableInstances, instanceTest)[0]
 
 	fmt.Printf("Raw Response Body:\n%v\n", dockerInstance)
@@ -52,7 +52,7 @@ func main() {
 	}
 
 	var app openapi.ApplicationView
-	app, _, err = client.DefaultApi.AddApplication(context.Background(), "orga_7058c8d9-9e54-49ba-ad66-891cb000918b", openapi.WannabeApplication{
+	app, _, err = client.SelfApi.AddSelfApplication(context.Background(), openapi.WannabeApplication{
 		Name:            "regis",
 		Description:     "desc",
 		Zone:            "par",
@@ -62,7 +62,7 @@ func main() {
 		MinFlavor:       "XS",
 		MaxFlavor:       "XS",
 		Deploy:          "git",
-		InstanceVersion: "20191024",
+		InstanceVersion: dockerInstance.Version,
 	})
 
 	fmt.Printf("Raw Response Body:\n%v\n", app)
